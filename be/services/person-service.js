@@ -1,11 +1,8 @@
 const personRepository = require('../repositories/person-repository');
 const validator = require('validator');
 
-// Check if validator is installed: npm list validator
-// Install if needed: npm install validator
-
 class PersonService {
-  async getAllPersons() {
+  async getAllPeople() {
     return await personRepository.findAll();
   }
 

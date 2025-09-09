@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const personRoutes = require('./routes/person-routes');
+const authRoutes = require('./routes/auth');
 const app = express();
 require('dotenv').config()
 const port = process.env.PORT || 5000;
@@ -17,7 +18,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Mount routes
 app.use('/api/persons', personRoutes);
-
+app.use('/api/auth', authRoutes);
 // Basic route for testing
 app.get('/', (req, res) => {
   res.send('Generation Tree API is running');
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+  console.log(`Visit the server at http://localhost:${port} 🚀`);
 }).on('error', (err) => {
   console.error('Server error:', err.message);
 });
