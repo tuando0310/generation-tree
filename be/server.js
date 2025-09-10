@@ -11,10 +11,14 @@ app.use(express.json());
 
 const cors = require('cors');
 app.use(cors({ origin: 'http://localhost:3000' }));
+app.use((req, res, next) => {
+  console.log('Request body 📥:', req.body);
+  next();
+});
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('MongoDB connection error:', err.message));
+  .then(() => console.log('MongoDB connected 🗄️'))
+  .catch(err => console.error('MongoDB connection error 😵:', err));
 
 // Mount routes
 app.use('/api/persons', personRoutes);
@@ -26,7 +30,7 @@ app.get('/', (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Server running on port ${port} 🎉`);
   console.log(`Visit the server at http://localhost:${port} 🚀`);
 }).on('error', (err) => {
   console.error('Server error:', err.message);

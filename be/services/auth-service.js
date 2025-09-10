@@ -1,13 +1,25 @@
 const userRepository = require('../repositories/user-repository');
+const personService = require('../services/person-service');
 const jwt = require('jsonwebtoken');
 
 class AuthService {
-  async signup(email, password) {
+  async signup(email, password, personalData) {
     const existingUser = await userRepository.findByEmail(email);
     if (existingUser) {
       throw new Error('User already exists');
     }
-    return userRepository.create({ email, password });
+
+    // Create User
+    const user = await userRepository.create({ email, password });
+
+    // Create Person with userId
+    const personData = { ...personalData, userId: user._id };
+    const person = await personService.createPerson(personData);
+
+    // Update User with Person ID
+    await userRepository.updatePersonId(user._id, person._id);
+
+    return user;
   }
 
   async login(email, password) {

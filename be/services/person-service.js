@@ -17,6 +17,12 @@ class PersonService {
     return person;
   }
 
+  async getPersonByUserId(userId) {
+    const person = await personRepository.findByUserId(userId);
+    if (!person) throw new Error('Person not found for this user');
+    return person;
+  }
+
   async createPerson(personData) {
     if (!personData.name || !personData.gender) {
       throw new Error('Name and gender are required');

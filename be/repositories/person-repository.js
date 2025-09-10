@@ -9,6 +9,10 @@ class PersonRepository {
     return await Person.findById(id);
   }
 
+  async findByUserId(userId) {
+    return Person.findOne({ userId });
+  }
+  
   async create(personData) {
     const person = new Person(personData);
     return await person.save();

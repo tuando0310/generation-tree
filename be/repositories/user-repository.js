@@ -19,6 +19,9 @@ class UserRepository {
     user.password = newPassword;
     return user.save();
   }
+  async updatePersonId(userId, personId) {
+    return User.findByIdAndUpdate(userId, { personId }, { new: true });
+  }
 }
 
 module.exports = new UserRepository();

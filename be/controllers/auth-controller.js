@@ -1,19 +1,19 @@
 const authService = require('../services/auth-service');
 
 class AuthController {
-  async signup(req, res) {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required' });
+   async signup(req, res) {
+    const { email, password, personalData } = req.body;
+    if (!email || !password || !personalData) {
+      return res.status(400).json({ message: 'Email, password, and personal data are required' });
     }
 
     try {
-      await authService.signup(email, password);
-      res.status(201).json({ message: 'User created successfully' });
+      await authService.signup(email, password, personalData);
+      res.status(201).json({ message: 'User and person created successfully' });
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
-  }
+  };
 
   async login(req, res) {
     const { email, password } = req.body;
