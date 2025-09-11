@@ -6,11 +6,11 @@ class PersonRepository {
   }
 
   async findById(id) {
-    return await Person.findById(id);
+    return await Person.findById(id).populate('parents children spouse');
   }
 
   async findByUserId(userId) {
-    return Person.findOne({ userId });
+    return Person.findOne({ userId }).populate('parents children spouse');
   }
   
   async create(personData) {
@@ -19,7 +19,7 @@ class PersonRepository {
   }
 
   async update(id, personData) {
-    return await Person.findByIdAndUpdate(id, personData, { new: true });
+    return await Person.findByIdAndUpdate(id, personData, { new: true }).populate('parents children spouse');
   }
 
   async delete(id) {

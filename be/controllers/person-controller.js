@@ -1,4 +1,5 @@
 const personService = require('../services/person-service');
+const relationshipService = require('../services/relationship-service');
 
 class PersonController {
   async getAllPeople(req, res) {
@@ -45,6 +46,35 @@ class PersonController {
       res.status(err.message === 'Person not found' ? 404 : 400).json({ message: err.message });
     }
   }
+  async addParent(req, res) {
+    const { personId, parentId } = req.body;
+    try {
+      const result = await relationshipService.addParent(personId, parentId);
+      res.json(result);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  };
+
+   async addChild(req, res) {
+    const { personId, childId } = req.body;
+    try {
+      const result = await relationshipService.addChild(personId, childId);
+      res.json(result);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  };
+
+  async addSpouse(req, res) {
+    const { personId, spouseId } = req.body;
+    try {
+      const result = await relationshipService.addSpouse(personId, spouseId);
+      res.json(result);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  };
 }
 
 module.exports = new PersonController();
