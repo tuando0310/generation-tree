@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Button } from '@/components/ui/button';
 
-function App() {
-  const [count, setCount] = useState(0)
-  console.log('VITE_PORT:', import.meta.env.VITE_PORT);
+function Navbar() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo/Title */}
+          <div className="flex-shrink-0">
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white">Generation Tree</h1>
+          </div>
+          {/* Right-side buttons */}
+          <div className="flex space-x-4">
+            <Button variant="outline" className="text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
+              Sign Up
+            </Button>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+              Login
+            </Button>
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </nav>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+      <Navbar />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Welcome to Generation Tree</h2>
+        <p className="mt-4 text-gray-600 dark:text-gray-400">
+          This is a placeholder for your home page content. Start building your app here!
+        </p>
+      </main>
+    </div>
+  );
+}
+
+export default App;
