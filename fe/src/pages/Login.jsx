@@ -1,22 +1,29 @@
+import { login } from '@/api/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Placeholder for JWT API call
-    console.log('Login attempt:', formData);
-    // Example: fetch('/api/login', { method: 'POST', body: JSON.stringify(formData) })
-    // Store JWT in localStorage and redirect to /dashboard
+    setError(null);
+    console.log(formData);
+    try {
+      await login(formData);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
