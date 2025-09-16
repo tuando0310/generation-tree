@@ -9,7 +9,7 @@ const personSchema = new mongoose.Schema({
   gender: {
     type: String,
     enum: ['male', 'female', 'other'],
-    required: true,
+    required: false,
   },
   birthDate: {
     type: Date,
@@ -40,6 +40,12 @@ const personSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  userId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User', 
+    unique: true, 
+    sparse: true 
+  }, // Optional, for user's Person only
 });
 
 module.exports = mongoose.model('Person', personSchema);

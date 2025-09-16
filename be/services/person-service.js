@@ -24,11 +24,8 @@ class PersonService {
   }
 
   async createPerson(personData) {
-    if (!personData.name || !personData.gender) {
-      throw new Error('Name and gender are required');
-    }
-    if (!['male', 'female', 'other'].includes(personData.gender)) {
-      throw new Error('Invalid gender');
+    if (!personData.name) {
+      throw new Error('Name  are required');
     }
     return await personRepository.create(personData);
   }

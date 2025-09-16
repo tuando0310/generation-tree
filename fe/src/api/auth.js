@@ -24,14 +24,14 @@ async function login(credentials) {
   }
 }
 
-async function signup(userData) {
+async function signup({ email, password, name }) {
   try {
     const response = await fetch(`${API_URL}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify({ email, password, personalData: { name } }),
     });
 
     if (!response.ok) {
@@ -40,11 +40,11 @@ async function signup(userData) {
     }
 
     const data = await response.json();
-    // Optionally store JWT if your backend returns it on signup
+    // Store JWT if returned
     if (data.token) {
       localStorage.setItem('token', data.token);
     }
-    return data; // Return data for further use
+    return data; // Return user data
   } catch (error) {
     throw new Error(error.message || 'Network error during sign-up');
   }

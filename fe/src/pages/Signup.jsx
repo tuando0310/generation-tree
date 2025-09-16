@@ -1,9 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { signup } from '@/api/auth';
+import { useState } from 'react';
 
 function SignUp() {
   const form = useForm({
@@ -11,15 +12,19 @@ function SignUp() {
       name: '',
       email: '',
       password: '',
-      dob: '',
     },
   });
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
-  const onSubmit = (data) => {
-    // Placeholder for sign-up API call
-    console.log('Sign-up attempt:', data);
-    // Example: fetch('/api/signup', { method: 'POST', body: JSON.stringify(data) })
-    // Redirect or show success message
+  const onSubmit = async (data) => {
+    setError(null);
+    try {
+      await signup(data); // Sends { email, password, name }
+      navigate('/dashboard'); // Redirect to dashboard
+    } catch (err) {
+      setError(err.message); // Displays "User already exists" or other errors
+    }
   };
 
   return (
@@ -34,6 +39,7 @@ function SignUp() {
             </Link>
           </p>
         </div>
+        {error && <p className="text-red-500 text-center">{error}</p>}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="mt-8 space-y-6">
             <FormField
@@ -73,19 +79,6 @@ function SignUp() {
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="••••••••" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="dob"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Date of Birth (Optional)</FormLabel>
-                  <FormControl>
-                    <Input type="date" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
