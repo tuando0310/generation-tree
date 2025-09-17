@@ -20,6 +20,15 @@ class PersonController {
     }
   }
 
+  async getPersonByUserId(req, res) {
+    try {
+      const person = await personService.getPersonByUserId(req.params.userId);
+      res.json(person);
+    } catch (err) {
+      res.status(err.message === 'Person not found' ? 404 : 400).json({ message: err.message });
+    }
+  }
+
   async createPerson(req, res) {
     try {
       const person = await personService.createPerson(req.body);

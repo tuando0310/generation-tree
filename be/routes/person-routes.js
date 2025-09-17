@@ -5,6 +5,7 @@ const personController = require('../controllers/person-controller');
 // Define routes
 router.get('/', personController.getAllPeople);
 router.get('/:personId', personController.getPersonById);
+router.get('/user/:userId', personController.getPersonByUserId);
 router.post('/', personController.createPerson);
 router.put('/:personId', personController.updatePerson);
 router.delete('/:personId', personController.deletePerson);
