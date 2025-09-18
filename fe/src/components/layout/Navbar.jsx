@@ -16,6 +16,7 @@ function Navbar() {
           const decoded = jwtDecode(token);
           const userId = decoded.userId;
           console.log(userId);
+          const personData = await getPersonByUserId(userId);
           setUser({
             name: personData.name || 'User', 
             email: personData.email || '',
@@ -23,7 +24,7 @@ function Navbar() {
           });
         } catch (error) {
           console.error('Error fetching user data:', error);
-          localStorage.removeItem('token'); // Clear invalid token
+          localStorage.removeItem('token'); 
         }
       }
       setLoading(false);
