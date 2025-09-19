@@ -31,11 +31,9 @@ function Dashboard() {
     };
     fetchUserData();
   }, []);
-
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <Navbar />
-
+      <Navbar user = {user} />
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       {loading ? (
         <p className="text-gray-600">Loading...</p>
