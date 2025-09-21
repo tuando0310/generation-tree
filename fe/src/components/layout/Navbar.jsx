@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import UserDropdown from './UserDropdown';
+import UserDropdown from '../pieces/UserDropdown';
 
 function Navbar({user}) {
   return (
