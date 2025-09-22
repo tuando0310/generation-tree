@@ -36,6 +36,12 @@ const personSchema = new mongoose.Schema({
     type: Number,
     required: false, // Optional, to track generation level
   },
+  imageUrl: {
+    type: String,
+    required: false, // Optional, to store a URL for the person's image
+    trim: true,
+    match: [/^https?:\/\/[^\s$.?#].[^\s]*$/, 'Please enter a valid URL'], // Basic URL validation
+  },
   createdAt: {
     type: Date,
     default: Date.now,
