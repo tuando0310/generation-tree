@@ -2,7 +2,7 @@ import Navbar from '@/components/layout/Navbar';
 import { jwtDecode } from 'jwt-decode';
 import { useState, useEffect } from 'react';
 import { getPersonByUserId } from '@/api/person';
-import UserNode from '@/components/pieces/UserNode';
+import PersonNode from '@/components/pieces/PersonNode';
 
 function Dashboard() {
   const [user, setUser] = useState(null);
@@ -16,11 +16,8 @@ function Dashboard() {
           const userId = decoded.userId;
           console.log(userId);
           const personData = await getPersonByUserId(userId);
-          setUser({
-            name: personData.name || 'User', 
-            email: personData.email || '',
-            image: personData.image || null 
-          });
+          console.log(personData);
+          setUser( personData);
         } catch (error) {
           console.error('Error fetching user data:', error);
           localStorage.removeItem('token'); 
@@ -37,7 +34,7 @@ function Dashboard() {
       {loading ? (
         <p className="text-gray-600">Loading...</p>
       ) : user ? (
-        <UserNode user={user} />
+        <PersonNode person={user} />
       ) : (
         <p className="text-gray-600">Not logged in</p>
       )}

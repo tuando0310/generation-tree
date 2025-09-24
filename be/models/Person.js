@@ -12,8 +12,23 @@ const personSchema = new mongoose.Schema({
     required: false,
   },
   birthDate: {
-    type: Date,
-    required: false, // Optional, as birth dates may not always be known
+    date: {
+      type: Date,
+      required: false, // Optional, for full dates when known
+    },
+    year: {
+      type: Number,
+      required: false, // Optional, for storing just the year (e.g., 1990 or -500 for BCE)
+    },
+    type: {
+      type: String,
+      enum: ['approximately', 'exactly', 'year only', 'before', 'after', 'range'],
+      required: false, // Optional, to specify the nature of the birth date
+    },
+    bce: {
+      type: Boolean,
+      default: false, // Default to false (not BCE)
+    }
   },
   deathDate: {
     type: Date,

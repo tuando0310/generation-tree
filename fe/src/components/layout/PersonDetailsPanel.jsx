@@ -2,28 +2,28 @@ import React from 'react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 
-const UserDetailsPanel = ({ user, open, setOpen }) => {
+const PersonDetailsPanel = ({ person, open, setOpen }) => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetContent side="left" className="w-80 p-6">
         <SheetHeader>
-          <SheetTitle>User Details</SheetTitle>
+          <SheetTitle>Person Details</SheetTitle>
           <SheetDescription>
-            View your personal information including name, email, and user ID.
+            View your personal information including name, email, and person ID.
           </SheetDescription>
         </SheetHeader>
         <div className="space-y-4 mt-4">
           <div>
             <label className="text-gray-700 font-semibold">Name:</label>
-            <p className="text-gray-600">{user.name || 'N/A'}</p>
+            <p className="text-gray-600">{person.name || 'N/A'}</p>
           </div>
           <div>
             <label className="text-gray-700 font-semibold">Email:</label>
-            <p className="text-gray-600">{user.email || 'N/A'}</p>
+            <p className="text-gray-600">{person.email || 'N/A'}</p>
           </div>
           <div>
-            <label className="text-gray-700 font-semibold">User ID:</label>
-            <p className="text-gray-600">{user.userId || 'N/A'}</p>
+            <label className="text-gray-700 font-semibold">Person ID:</label>
+            <p className="text-gray-600">{person.personId || 'N/A'}</p>
           </div>
         </div>
         <Button
@@ -37,4 +37,4 @@ const UserDetailsPanel = ({ user, open, setOpen }) => {
   );
 };
 
-export default UserDetailsPanel;
+export default PersonDetailsPanel;

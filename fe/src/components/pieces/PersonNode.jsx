@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getInitials } from '@/helper/name';
-import UserDetailsPanel from '@/components/layout/UserDetailsPanel';
+import PersonDetailsPanel from '@/components/layout/PersonDetailsPanel';
 
-const UserNode = ({ user }) => {
+const PersonNode = ({ person }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <div className="text-center">
-      <UserDetailsPanel user={user} open={open} setOpen={setOpen} />
+      <PersonDetailsPanel person={person} open={open} setOpen={setOpen} />
       <div
         className="relative w-32 h-32 mx-auto rounded-full overflow-hidden cursor-pointer"
         style={{
@@ -22,16 +22,16 @@ const UserNode = ({ user }) => {
           style={{ filter: 'blur(2px)' }}
         ></div>
         <Avatar className="w-24 h-24 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <AvatarImage src={user.avatarUrl || ''} alt="User avatar" />
+          <AvatarImage src={person.avatarUrl || ''} alt="Person avatar" />
           <AvatarFallback className="text-3xl">
-            {getInitials(user.name, user.email)}
+            {getInitials(person.name, person.email)}
           </AvatarFallback>
         </Avatar>
       </div>
       <div className="mt-4">
         <p className="text-gray-500">Vocative</p>
         <p className="text-xl font-semibold text-gray-700">
-          {user.name || user.email || 'N/A'}
+          {person.name || person.email || 'N/A'}
         </p>
       </div>
       <p className="text-gray-500 mt-2">Start your family tree here</p>
@@ -39,4 +39,4 @@ const UserNode = ({ user }) => {
   );
 };
 
-export default UserNode;
+export default PersonNode;
